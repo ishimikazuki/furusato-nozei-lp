@@ -1,93 +1,95 @@
-/* ===== furusato-bouei-lp Design Tokens v5「静かなリッチ／プレミアム・エディトリアル金融」=====
-   明朝ディスプレイ × 深いティール1アクセント × 温かな砂のニュートラル。
-   色で塗らず、タイポ・余白・写真・クラフトで高級感を作る。緊急コーラルは全ページ1箇所のみ。
-   DESIGN.md が唯一の正。ここにない色・余白・角丸はセクションで直書き禁止（lintで強制）。 */
+/* ===== furusato-bouei-lp Design Tokens v7「ドクターの差引き台帳」=====
+   医療の精密さ × 会計/台帳の論理。クールな台帳紙に、黒字(実質無料)グリーンと
+   赤字(コスト)レッドの会計セマンティクス。見出し・本文は IBM Plex Sans JP、
+   数字は IBM Plex Mono（金融端末/明細の質感）。明朝×クリームの"AI定番"は卒業。
+   DESIGN.md/AGENTS方針が正。ここにない色・余白・角丸はセクション直書き禁止（lintで強制）。
+   ※変数名は v5/v6 を踏襲（セクションの参照を壊さないため）。意味は本AD用に再定義。 */
 :root {
-  /* ---- Colors : 温白60 / 墨・砂・ティール構造30 / アクセント10 ---- */
-  --c-paper:      #FAF6EC;  /* 温かい紙白（やや深め）。ページの地 */
-  --c-paper-dim:  #F1E9D8;  /* 紙白の一段沈み（パネル・面の区切り） */
-  --c-sand:       #E7DBC2;  /* 砂/石の温かなニュートラル（罫・章番号・上質パネル。金は使わない） */
-  --c-sand-soft:  #F3ECDD;  /* 砂の薄面（card wash） */
-  --c-surface:    #FFFFFF;  /* カード白面 */
+  /* ---- Colors : クール台帳紙60 / 墨インク構造30 / 黒字緑・赤字赤10 ---- */
+  --c-paper:      #ECEFE9;  /* クールな台帳紙（地）。温かいクリームではない */
+  --c-paper-dim:  #E1E6DE;  /* 一段沈んだ面（パネル・コスト面） */
+  --c-sand:       #D4DBD2;  /* クールなニュートラル（旧:砂）。罫・パネル */
+  --c-sand-soft:  #F0F3EE;  /* 薄面（card wash） */
+  --c-surface:    #FBFCFA;  /* カード白面（ややクール） */
 
-  --c-ink:        #14201E;  /* 深い墨スレート（やや緑み）。本文・見出し */
-  --c-ink-soft:   #55635E;  /* 補足・二次テキスト */
-  --c-ink-faint:  #8A938D;  /* キャプション・三次テキスト */
-  --c-line:       #E2D7C2;  /* 罫線・カード境界（砂系のhairline） */
-  --c-line-soft:  #EEE6D6;  /* 弱い区切り線 */
+  --c-ink:        #13231D;  /* 深い台帳インク（緑み墨）。本文・見出し */
+  --c-ink-soft:   #4D5B54;  /* 補足・二次テキスト */
+  --c-ink-faint:  #7E8A82;  /* キャプション・三次テキスト */
+  --c-line:       #CCD4CC;  /* 罫線・カード境界（クールhairline＝台帳の罫） */
+  --c-line-soft:  #DBE1D9;  /* 弱い区切り線 */
 
-  --c-teal:       #0C5A4E;  /* ブランド/主アクセント：CTA・em強調・アイコン・決め数字（v4より深い） */
-  --c-teal-deep:  #084438;  /* hover・濃面 */
-  --c-teal-ink:   #0A302A;  /* 最暗：クロージング地 */
-  --c-teal-wash:  #E6EEEA;  /* カードの極薄ウォッシュ */
-  --c-gold-line:  #B8975A;  /* 砂より一段濃い真鍮系の極細ライン専用（塗り禁止・罫/下線1pxのみ。高級の"線"） */
+  --c-teal:       #0B6B4D;  /* 黒字グリーン＝主アクセント：CTA・結果・実質無料・em */
+  --c-teal-deep:  #084A36;  /* hover・濃面 */
+  --c-teal-ink:   #0C2A20;  /* 最暗：ダークセクション地 */
+  --c-teal-wash:  #E2EEE8;  /* 黒字の極薄ウォッシュ */
+  --c-gold-line:  #AAB6AC;  /* 旧:真鍮。本ADでは中立の極細罫に再定義（塗り禁止・1px罫専用） */
 
-  --c-coral:      #D8543B;  /* 第二アクセント＝緊急色。全ページ1箇所(クロージング)限定 */
-  --c-coral-deep: #BC4329;
+  --c-coral:      #B23A2E;  /* 赤字レッド＝コスト/緊急：相殺前の料金・締切。会計の"赤" */
+  --c-coral-deep: #8E2C22;
 
   /* ---- Alpha tokens（透過はこれだけ） ---- */
-  --c-ink-a70:    rgba(20, 32, 30, .70);
-  --c-ink-a55:    rgba(20, 32, 30, .55);
-  --c-ink-a12:    rgba(20, 32, 30, .12);
-  --c-ink-a08:    rgba(20, 32, 30, .08);
-  --c-ink-a06:    rgba(20, 32, 30, .05);   /* ghost数字・透かし */
-  --c-ink-a04:    rgba(20, 32, 30, .035);
+  --c-ink-a70:    rgba(19, 35, 29, .70);
+  --c-ink-a55:    rgba(19, 35, 29, .55);
+  --c-ink-a12:    rgba(19, 35, 29, .12);
+  --c-ink-a08:    rgba(19, 35, 29, .08);
+  --c-ink-a06:    rgba(19, 35, 29, .05);
+  --c-ink-a04:    rgba(19, 35, 29, .035);
   --c-white-a92:  rgba(255, 255, 255, .92);
   --c-white-a70:  rgba(255, 255, 255, .70);
   --c-white-a55:  rgba(255, 255, 255, .55);
   --c-white-a16:  rgba(255, 255, 255, .16);
   --c-white-a08:  rgba(255, 255, 255, .08);
-  --c-teal-a14:   rgba(12, 90, 78, .14);
-  --c-teal-a30:   rgba(12, 90, 78, .30);
-  --c-teal-a08:   rgba(12, 90, 78, .07);
-  --c-sand-a40:   rgba(231, 219, 194, .40);
-  --c-gold-a40:   rgba(184, 151, 90, .40);  /* 真鍮ラインの薄め */
-  --c-coral-a14:  rgba(216, 84, 59, .14);
-  --c-coral-a30:  rgba(216, 84, 59, .30);
+  --c-teal-a14:   rgba(11, 107, 77, .14);
+  --c-teal-a30:   rgba(11, 107, 77, .30);
+  --c-teal-a08:   rgba(11, 107, 77, .08);
+  --c-sand-a40:   rgba(212, 219, 210, .45);
+  --c-gold-a40:   rgba(170, 182, 172, .50);
+  --c-coral-a14:  rgba(178, 58, 46, .12);
+  --c-coral-a30:  rgba(178, 58, 46, .30);
 
-  /* ---- Typography : 明朝ディスプレイ + ゴシック本文 + グロテスク数字 ---- */
-  --font-serif:   "Zen Old Mincho", "Hiragino Mincho ProN", serif;          /* 見出し・大数字添え・引用（高級ディスプレイ） */
-  --font-body:    "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", system-ui, sans-serif; /* 本文・眉・UI */
-  --font-num:     "Schibsted Grotesk", "Zen Kaku Gothic New", sans-serif;    /* 大数字・英字 */
+  /* ---- Typography : IBM Plex Sans JP（見出し・本文）＋ IBM Plex Mono（数字/ラベル）---- */
+  --font-serif:   "IBM Plex Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;          /* 見出し（旧:明朝枠。本ADは精密ディスプレイ） */
+  --font-body:    "IBM Plex Sans JP", "Hiragino Kaku Gothic ProN", system-ui, sans-serif; /* 本文・UI */
+  --font-num:     "IBM Plex Mono", "IBM Plex Sans JP", ui-monospace, monospace;          /* 大数字・明細・眉ラベル（台帳/端末の質感） */
 
-  --fs-hero:    clamp(36px, 5.6vw, 68px);
-  --fs-h2:      clamp(28px, 3.8vw, 48px);
+  --fs-hero:    clamp(34px, 5.2vw, 62px);
+  --fs-h2:      clamp(27px, 3.6vw, 46px);
   --fs-h3:      clamp(18px, 2.1vw, 23px);
   --fs-eyebrow: 12px;
-  --fs-quote:   clamp(22px, 3.0vw, 36px);  /* プルクオート（明朝） */
-  --fs-num-xl:  clamp(56px, 8.4vw, 112px);
-  --fs-num-l:   clamp(36px, 5vw, 64px);
+  --fs-quote:   clamp(21px, 2.8vw, 33px);
+  --fs-num-xl:  clamp(54px, 8vw, 104px);
+  --fs-num-l:   clamp(36px, 5vw, 62px);
   --fs-num-m:   clamp(26px, 3.2vw, 40px);
   --fs-body:    clamp(15px, 1.45vw, 17px);
   --fs-lead:    clamp(16px, 1.7vw, 19px);
   --fs-small:   13px;
   --fs-tiny:    12px;
-  --lh-display: 1.34;
-  --lh-tight:   1.2;
-  --lh-body:    1.92;
-  --ls-display: .005em;
-  --ls-eyebrow: .22em;   /* 眉は広めトラッキングで上質に */
+  --lh-display: 1.3;
+  --lh-tight:   1.18;
+  --lh-body:    1.9;
+  --ls-display: -.01em;   /* Plexの精密ディスプレイは少し詰める */
+  --ls-eyebrow: .18em;    /* モノ眉ラベルの広トラッキング */
 
   /* ---- Spacing scale（この変数以外の余白値はセクションで禁止） ---- */
   --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
   --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
-  --section-pad-y: clamp(64px, 8.5vw, 120px);  /* v6: 余白を適正化（過剰な空きで安く見えるのを防ぐ） */
+  --section-pad-y: clamp(64px, 8.5vw, 120px);
   --content-max:   1160px;
-  --content-wide:  1320px;  /* v6: 写真主役の広めグリッド */
+  --content-wide:  1320px;
   --content-narrow: 740px;
   --content-pad-x: clamp(20px, 4vw, 48px);
 
-  /* ---- Shape ---- */
-  --radius-sm:   10px;
-  --radius-md:   16px;
-  --radius-lg:   26px;
+  /* ---- Shape（台帳らしく精密＝角は控えめ） ---- */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
   --radius-pill: 999px;
-  --radius-tag:  6px;
+  --radius-tag:  5px;
 
-  /* ---- Elevation（影は浮かせる要素だけ。深度は罫＋面＋影で） ---- */
-  --shadow-card: 0 1px 2px rgba(20,32,30,.04), 0 12px 34px rgba(20,32,30,.07);
-  --shadow-lift: 0 8px 20px rgba(20,32,30,.09), 0 30px 70px rgba(20,32,30,.13);
-  --shadow-cta:  0 10px 26px rgba(12,90,78,.30);
+  /* ---- Elevation（影は控えめ。深度は罫＋面で） ---- */
+  --shadow-card: 0 1px 2px rgba(19,35,29,.04), 0 10px 30px rgba(19,35,29,.06);
+  --shadow-lift: 0 8px 20px rgba(19,35,29,.08), 0 28px 64px rgba(19,35,29,.12);
+  --shadow-cta:  0 8px 22px rgba(11,107,77,.26);
 
   --ease: cubic-bezier(.22, 1, .36, 1);
 }
@@ -101,11 +103,10 @@ body {
   line-height: var(--lh-body);
   color: var(--c-ink);
   background-color: var(--c-paper);
-  /* 紙白の平板さ対策：極薄の暖色ウォッシュ（意図的アトモスフィア） */
+  /* クールな台帳紙のアトモスフィア（黒字グリーンのごく薄い気配） */
   background-image:
-    radial-gradient(64vw 52vh at 84% -10%, var(--c-teal-a08), transparent 60%),
-    radial-gradient(58vw 46vh at -12% 4%, var(--c-sand-a40), transparent 56%);
-  background-attachment: fixed;
+    radial-gradient(60vw 48vh at 90% -8%, var(--c-teal-a08), transparent 60%),
+    radial-gradient(52vw 42vh at -10% 2%, rgba(19,35,29,.03), transparent 56%);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -116,117 +117,114 @@ img { max-width: 100%; display: block; }
 .lp-container { max-width: var(--content-max); margin: 0 auto; padding-left: var(--content-pad-x); padding-right: var(--content-pad-x); }
 .lp-section  { padding-top: var(--section-pad-y); padding-bottom: var(--section-pad-y); position: relative; overflow: clip; }
 
-/* 機能用途のSVGアイコン（00-icons.htmlスプライト）。同一ストローク幅で統一 */
+/* 機能用途のSVGアイコン（00-icons.htmlスプライト） */
 .ic { width: 22px; height: 22px; stroke: currentColor; stroke-width: 1.5; fill: none; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
 
-/* ===== 共有コンポーネント（全セクション共通。並列実装の表記統一の核） ===== */
+/* ===== 共有コンポーネント ===== */
 
-/* 眉ラベル：先頭に短い真鍮罫＋小キャップ・広トラッキング（上質なoverline） */
+/* 眉ラベル：モノスペースの小キャップ＝台帳/端末のラベル。先頭に中立の短罫 */
 .lp-eyebrow {
   display: inline-flex; align-items: center; gap: var(--sp-3);
-  font-family: var(--font-body);
-  font-size: var(--fs-eyebrow); font-weight: 700;
+  font-family: var(--font-num);
+  font-size: var(--fs-eyebrow); font-weight: 600;
   letter-spacing: var(--ls-eyebrow);
   color: var(--c-teal);
   text-transform: uppercase;
   word-break: keep-all;
 }
-.lp-eyebrow::before { content: ""; width: 32px; height: 1px; background: var(--c-gold-line); }
-.lp-eyebrow.is-light { color: var(--c-white-a70); }   /* ダーク面用 */
-.lp-eyebrow.is-light::before { background: var(--c-gold-a40); }
+.lp-eyebrow::before { content: ""; width: 28px; height: 1px; background: var(--c-teal); }
+.lp-eyebrow.is-light { color: var(--c-white-a70); }
+.lp-eyebrow.is-light::before { background: var(--c-white-a55); }
 
-/* 見出し共通（明朝・主張文。強調 em=ティール。サイズ競合させない two-tone） */
+/* 見出し共通（Plex精密ディスプレイ。強調 em=黒字グリーン two-tone） */
 .lp-h2 { font-family: var(--font-serif); font-size: var(--fs-h2); line-height: var(--lh-display); letter-spacing: var(--ls-display); font-weight: 700; color: var(--c-ink); word-break: keep-all; }
 .lp-h2 em, .lp-em { font-style: normal; color: var(--c-teal); }
-.lp-h3 { font-family: var(--font-serif); font-size: var(--fs-h3); line-height: var(--lh-tight); font-weight: 700; color: var(--c-ink); }
+.lp-h3 { font-family: var(--font-serif); font-size: var(--fs-h3); line-height: var(--lh-tight); font-weight: 600; color: var(--c-ink); }
 .lp-lead { font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--c-ink-soft); }
 .lp-nowrap { display: inline-block; }
 
-/* プルクオート（明朝・大・編集的） */
-.lp-quote { font-family: var(--font-serif); font-size: var(--fs-quote); line-height: 1.6; font-weight: 500; color: var(--c-ink); word-break: keep-all; }
+/* プルクオート（Plex・大・引用） */
+.lp-quote { font-family: var(--font-serif); font-size: var(--fs-quote); line-height: 1.55; font-weight: 600; color: var(--c-ink); word-break: keep-all; letter-spacing: -.005em; }
 .lp-quote em, .lp-quote .lp-em { font-style: normal; color: var(--c-teal); }
 
-/* big numerals（グロテスク・タブ数字。単位は小さく） */
-.lp-num { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-weight: 800; line-height: 1; letter-spacing: -.015em; }
-.lp-num-unit { font-family: var(--font-body); font-weight: 700; font-size: .32em; color: var(--c-ink-soft); }
+/* big numerals（モノ・タブ数字＝明細。単位は小さく） */
+.lp-num { font-family: var(--font-num); font-variant-numeric: tabular-nums; font-weight: 600; line-height: 1; letter-spacing: -.02em; }
+.lp-num-unit { font-family: var(--font-num); font-weight: 500; font-size: .36em; color: var(--c-ink-soft); letter-spacing: 0; }
 
-/* ghost numeral（結論数字を超低コントラストで背面に） */
-.lp-ghost { font-family: var(--font-num); font-weight: 800; color: var(--c-ink-a06); line-height: .8; pointer-events: none; user-select: none; }
+/* ghost numeral（背面の超低コントラスト数字） */
+.lp-ghost { font-family: var(--font-num); font-weight: 700; color: var(--c-ink-a06); line-height: .8; pointer-events: none; user-select: none; }
 
-/* 主CTA（ティールのピル。最も押せる要素） */
+/* 主CTA（黒字グリーンの精密な角型ボタン） */
 .lp-cta {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-3);
-  font-family: var(--font-body); font-weight: 700; font-size: clamp(16px, 1.9vw, 18px); letter-spacing: .03em;
+  font-family: var(--font-body); font-weight: 700; font-size: clamp(16px, 1.9vw, 18px); letter-spacing: .01em;
   color: var(--c-surface); background: var(--c-teal);
-  border: none; border-radius: var(--radius-pill); cursor: pointer;
+  border: none; border-radius: var(--radius-sm); cursor: pointer;
   padding: var(--sp-4) var(--sp-7); text-decoration: none; text-align: center;
   box-shadow: var(--shadow-cta); word-break: keep-all;
   transition: background .18s var(--ease), transform .22s var(--ease), box-shadow .22s var(--ease);
 }
 .lp-cta .ic { width: 18px; height: 18px; stroke-width: 2; }
-.lp-cta:hover { background: var(--c-teal-deep); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(12,90,78,.36); }
+.lp-cta:hover { background: var(--c-teal-deep); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(11,107,77,.32); }
 .lp-cta:active { transform: translateY(0); }
-.lp-cta--lg { padding: var(--sp-5) var(--sp-8); font-size: clamp(17px, 2.1vw, 20px); }
+.lp-cta--lg { padding: var(--sp-5) var(--sp-7); font-size: clamp(17px, 2.1vw, 20px); }
 .lp-cta--ghost { background: transparent; color: var(--c-teal); box-shadow: none; border: 1px solid var(--c-teal-a30); }
 .lp-cta--ghost:hover { background: var(--c-teal-wash); transform: translateY(-2px); box-shadow: none; }
 .lp-cta-note { font-size: var(--fs-small); color: var(--c-ink-faint); margin-top: var(--sp-3); }
 .lp-cta-sub { display: inline-block; }
 
-/* カード白面（影＋砂のhairline境界） */
+/* カード白面（影＋クール罫） */
 .lp-card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
 .lp-lift { transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
 .lp-lift:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
 
-/* 写真ズーム（親に .lp-zoom）。深度は影＋境界で */
+/* 写真ズーム */
 .lp-zoom { overflow: hidden; }
 .lp-zoom img { transition: transform .8s var(--ease); width: 100%; height: 100%; object-fit: cover; }
 .lp-zoom:hover img { transform: scale(1.04); }
 
-/* スタンプ風タグ（「実質負担 2,000円」等。回転禁止・ページ2箇所まで） */
+/* スタンプ風タグ（明細の補助。黒字グリーン角枠） */
 .lp-stamp {
   display: inline-flex; align-items: baseline; gap: var(--sp-2);
-  font-family: var(--font-num); font-weight: 700; font-size: var(--fs-small); letter-spacing: .04em;
+  font-family: var(--font-num); font-weight: 600; font-size: var(--fs-small); letter-spacing: .02em;
   color: var(--c-teal); background: var(--c-teal-wash);
   border: 1px solid var(--c-teal-a30); border-radius: var(--radius-tag);
   padding: var(--sp-2) var(--sp-3);
 }
 
-/* 章ディバイダ：真鍮hairline＋明朝の章番号（エディトリアルの署名） */
+/* 章ディバイダ：中立hairline＋番号 */
 .lp-divider { display: flex; align-items: center; gap: var(--sp-4); }
 .lp-divider::before, .lp-divider::after { content: ""; height: 1px; background: var(--c-line); flex: 1; }
-.lp-divider .lp-divider-num { font-family: var(--font-serif); font-size: var(--fs-h3); color: var(--c-gold-line); font-weight: 700; }
+.lp-divider .lp-divider-num { font-family: var(--font-num); font-size: var(--fs-h3); color: var(--c-ink-faint); font-weight: 600; }
 
-/* ===== v6 サーフェス・リズム（面の変化で単調さ・安物感を断つ） ===== */
-/* セクションごとに地を変えてスクロールにリズムを作る */
+/* ===== サーフェス・リズム（面の変化） ===== */
 .lp-section--paper    { background: var(--c-paper); }
 .lp-section--paperdim { background: var(--c-paper-dim); }
 .lp-section--sand     { background: var(--c-sand-soft); }
 .lp-section--white    { background: var(--c-surface); }
 .lp-section--teal     { background: var(--c-teal-wash); }
 .lp-section--dark     { background: var(--c-teal-ink); color: var(--c-white-a92); }
-/* 上下の極細セパレータ（面の境目を上品に締める） */
 .lp-section--ruled    { border-top: 1px solid var(--c-line); }
-/* 端まで使うセクション（写真帯・フルブリード用：左右paddingを殺す） */
 .lp-section--flush    { padding-left: 0; padding-right: 0; }
 
-/* 紙の微粒子テクスチャ（質感。平板さ＝安物感の対策。ごく薄く） */
+/* 台帳の罫線テクスチャ（質感＝会計用紙の横罫。ごく薄く） */
 .lp-grain { position: relative; }
 .lp-grain::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background-image: radial-gradient(var(--c-ink-a06) 0.5px, transparent 0.6px);
-  background-size: 3px 3px; opacity: .5;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 31px, var(--c-ink-a06) 31px, var(--c-ink-a06) 32px);
+  opacity: .6;
 }
 .lp-grain > * { position: relative; z-index: 1; }
 
-/* 信頼バー（提携実績ロゴ/数字の帯）。ダーク地で白文字、真鍮の細仕切り */
+/* 信頼バー（提携実績の帯）。ダーク地で白文字、中立の細仕切り */
 .lp-trust { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--sp-7); }
 .lp-trust-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); text-align: center; }
 .lp-trust-item .lp-num { color: var(--c-surface); }
 .lp-trust-label { font-size: var(--fs-tiny); letter-spacing: .08em; color: var(--c-white-a70); }
 .lp-trust-sep { width: 1px; align-self: stretch; background: var(--c-gold-a40); }
 
-/* セクション見出しの上に置く大型の薄い章番号（誌面の奥行き） */
-.lp-folio { font-family: var(--font-num); font-weight: 800; color: var(--c-ink-a06); line-height: 1; pointer-events: none; user-select: none; }
+/* 大型の薄い章番号 */
+.lp-folio { font-family: var(--font-num); font-weight: 700; color: var(--c-ink-a06); line-height: 1; pointer-events: none; user-select: none; }
 
 /* ===== モーション共通（発火JSは sections/99-motion.html） ===== */
 [data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .85s var(--ease), transform .85s var(--ease); }

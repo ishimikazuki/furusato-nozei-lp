@@ -7,12 +7,12 @@
 <meta name="description" content="確定申告の税理士報酬を、ふるさと納税の控除枠で実質無料に。自己負担は一律2,000円のみ。国税庁ルール100%遵守、医師のための正攻法スキーム。">
 <meta property="og:title" content="資産防衛コンサル × ふるさと納税 ＝ 確定申告が実質無料｜ドクター限定">
 <meta property="og:description" content="本来納める税金で、今年の確定申告を実質無料で丸投げ。自己負担は一律2,000円。医師のための正攻法スキーム。">
-<meta name="theme-color" content="#0E6155">
+<meta name="theme-color" content="#0B6B4D">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=Zen+Old+Mincho:wght@500;700;900&family=Schibsted+Grotesk:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230E6155'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="css/tokens.css?v=773e5a43">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230B6B4D'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/tokens.css?v=612ccd8b">
 </head>
 <body>
 <!-- ===== 00-icons.html ===== -->
@@ -155,7 +155,7 @@ window.FC_CONFIG = {
    sticky CTA(z-index 9000)より上に出すため z-index 9001。 */
 
 /* 固定帯ぶんだけページ本体を押し下げる（帯が hero に被らないように） */
-body { padding-top: var(--sp-6); }
+body { padding-top: var(--sp-7); }
 
 #fc-counter {
   position: fixed;
@@ -163,9 +163,9 @@ body { padding-top: var(--sp-6); }
   left: 0;
   right: 0;
   z-index: 9001;
-  background: var(--c-surface);
-  /* 真鍮1px罫を下辺に（上品な区切り） */
-  border-bottom: 1px solid var(--c-gold-a40);
+  /* 黒字グリーンのごく薄ウォッシュ＋下辺2px罫で"目立つけど上品" */
+  background: var(--c-teal-wash);
+  border-bottom: 2px solid var(--c-teal);
   box-shadow: var(--shadow-card);
 }
 #fc-counter .fc-inner {
@@ -177,44 +177,49 @@ body { padding-top: var(--sp-6); }
   justify-content: center;
   gap: var(--sp-3);
   font-family: var(--font-body);
-  font-size: var(--fs-tiny);
-  line-height: 1;
+  line-height: 1.2;
   white-space: nowrap;
 }
+/* 受付中の生きたドット */
+#fc-counter .fc-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--c-teal);
+  flex-shrink: 0;
+  animation: fc-blink 1.6s infinite ease-in-out;
+}
+@keyframes fc-blink { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
 #fc-counter .fc-label {
-  color: var(--c-ink-soft);
-  letter-spacing: .04em;
-}
-#fc-counter .fc-label .ic {
-  width: 13px;
-  height: 13px;
-  color: var(--c-teal);
-  vertical-align: -2px;
-  margin-right: var(--sp-1);
-}
-#fc-counter .fc-remain {
+  font-size: var(--fs-small);
+  font-weight: 600;
   color: var(--c-ink);
   letter-spacing: .02em;
+}
+#fc-counter .fc-remain {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--sp-1);
+  color: var(--c-ink-soft);
+  font-size: var(--fs-tiny);
 }
 #fc-counter .fc-num {
   font-family: var(--font-num);
   font-weight: 700;
-  font-size: var(--fs-small);
+  font-size: clamp(18px, 2.4vw, 24px);
   color: var(--c-teal);
-  margin: 0 2px;
 }
 
-/* ごく狭い画面ではラベルを少し縮める */
-@media (max-width: 380px) {
-  #fc-counter .fc-inner { gap: var(--sp-2); font-size: 11px; }
+/* ごく狭い画面では詰める */
+@media (max-width: 420px) {
+  #fc-counter .fc-inner { gap: var(--sp-2); }
+  #fc-counter .fc-label { font-size: var(--fs-tiny); }
+  #fc-counter .fc-num { font-size: 19px; }
 }
 </style>
 
 <div id="fc-counter" role="status" aria-live="polite" aria-label="初年度確定申告 無料枠の残り人数">
   <div class="fc-inner">
-    <span class="fc-label">
-      <svg class="ic" aria-hidden="true"><use href="#ic-calendar"/></svg>初年度確定申告 無料枠
-    </span>
+    <span class="fc-dot" aria-hidden="true"></span>
+    <span class="fc-label">初年度確定申告 無料枠</span>
     <span class="fc-remain">残り <span class="fc-num" id="fc-counter-n">50</span> 名</span>
   </div>
 </div>
@@ -323,7 +328,7 @@ body { padding-top: var(--sp-6); }
   /* モーションはJS経由で data-count-to と連動 */
 }
 
-/* --- 明朝H1 two-tone --- */
+/* --- H1（Plex精密ディスプレイ） two-tone --- */
 #hero-h1 {
   font-family: var(--font-serif);
   font-size: var(--fs-hero);
@@ -334,20 +339,67 @@ body { padding-top: var(--sp-6); }
   word-break: keep-all;
 }
 #hero-h1 em {
-  /* two-tone: ティール強調（font-style reset）*/
   font-style: normal;
   color: var(--c-teal);
 }
 
-/* 権威ライン：小キャップ・法的信頼感 */
+/* ② 価値の「式」を一目で：資産防衛 × ふるさと納税 ＝ 確定申告が実質無料 */
+#hero-eq {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+}
+#hero-eq .eq-term {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 600;
+  color: var(--c-ink);
+  background: var(--c-surface);
+  border: 1px solid var(--c-line);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-3);
+}
+#hero-eq .eq-op {
+  font-family: var(--font-num);
+  font-size: var(--fs-lead);
+  font-weight: 500;
+  color: var(--c-ink-faint);
+}
+#hero-eq .eq-result {
+  font-family: var(--font-body);
+  font-size: var(--fs-small);
+  font-weight: 700;
+  color: var(--c-surface);
+  background: var(--c-teal);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-4);
+}
+
+/* ④ 日本初・ドクター限定：大きく・色を効かせてアピール */
+#hero-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(15px, 1.9vw, 19px);
+  letter-spacing: .02em;
+  color: var(--c-surface);
+  background: var(--c-teal);
+  border-radius: var(--radius-sm);
+  padding: var(--sp-2) var(--sp-4);
+  box-shadow: var(--shadow-cta);
+}
+
+/* 権威ライン：法的信頼感 */
 #hero-authority {
   font-family: var(--font-body);
   font-size: var(--fs-small);
   color: var(--c-ink-soft);
   line-height: 1.7;
   padding-left: var(--sp-4);
-  border-left: 1px solid var(--c-gold-line); /* 真鍮hairline = 権威の証し */
+  border-left: 2px solid var(--c-teal); /* 黒字グリーンの権威罫 */
 }
+#hero-authority strong { color: var(--c-ink); font-weight: 700; }
 
 /* CTA グループ */
 #hero-cta-wrap {
@@ -476,34 +528,43 @@ body { padding-top: var(--sp-6); }
         </div>
       </div>
 
-      <!-- 眉ラベル -->
+      <!-- 眉ラベル（モノ） -->
       <p class="lp-eyebrow" data-reveal data-reveal-delay="2">
-        資産防衛コンサル × ふるさと納税 ＝ 確定申告が実質無料
+        医師限定・資産防衛スキーム
       </p>
 
-      <!-- 明朝H1 two-tone -->
-      <h1 id="hero-h1" class="lp-h2" data-reveal data-reveal-delay="3">
+      <!-- H1 two-tone -->
+      <h1 id="hero-h1" class="lp-h2" data-reveal data-reveal-delay="2">
         その税理士報酬、<em>ふるさと納税</em>で<br>
         まかなえます。
       </h1>
 
-      <!-- サブリード -->
+      <!-- ② 価値の式（一目でわかるアピール） -->
+      <div id="hero-eq" data-reveal data-reveal-delay="3" aria-label="資産防衛コンサル かける ふるさと納税 イコール 確定申告が実質無料">
+        <span class="eq-term">資産防衛コンサル</span>
+        <span class="eq-op" aria-hidden="true">×</span>
+        <span class="eq-term">ふるさと納税</span>
+        <span class="eq-op" aria-hidden="true">＝</span>
+        <span class="eq-result">確定申告が実質無料</span>
+      </div>
+
+      <!-- サブリード（③「本来納める税金」を太字＋鉤括弧） -->
       <p class="lp-lead" data-reveal data-reveal-delay="4">
-        ポケットマネーではなく、本来納める税金で。<br>
+        ポケットマネーではなく、<strong style="color:var(--c-ink);font-weight:700;">「本来納める税金」</strong>で。<br>
         今年の確定申告を"実質無料"で丸投げする、<br class="br-hide-lg">
         医師のための正攻法です。
       </p>
 
-      <!-- 権威ライン -->
+      <!-- ④ 日本初・ドクター限定（大きく・色を効かせて） -->
       <p id="hero-authority" data-reveal data-reveal-delay="4">
-        【日本初・ドクター限定】税理士報酬は先生のふるさと納税枠で全額決済。<br>
-        国税庁のルールを100%遵守した合法的スキームです。
+        <span id="hero-badge">日本初・ドクター限定</span><br>
+        税理士報酬は先生のふるさと納税枠で<strong>全額決済</strong>。国税庁のルールを100%遵守した合法的スキームです。
       </p>
 
-      <!-- 主CTA -->
+      <!-- ⑤ 主CTA -->
       <div id="hero-cta-wrap" data-reveal data-reveal-delay="5">
-        <a href="#form" class="lp-cta lp-cta--lg" aria-label="ふるさと納税で確定申告を申し込む">
-          <span class="lp-nowrap">実質2,000円で、はじめる</span>
+        <a href="#form" class="lp-cta lp-cta--lg" aria-label="実質無料で確定申告を依頼する">
+          <span class="lp-nowrap">実質無料で確定申告を依頼する</span>
           <svg class="ic" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
         <p class="lp-cta-note">
@@ -687,497 +748,230 @@ body { padding-top: var(--sp-6); }
 </section>
 <!-- ===== 03-mechanism.html ===== -->
 <style>
-/* ===== 03-mechanism.html 固有スタイル =====
-   仕組みセクション。図解に集中し、比較パネル＋4ステップで密度を稼ぐ。
-   補助写真は 05-merits に集約し、ここはテキスト図解のみ（SECTION_SPECS指示）。 */
+/* ===== 03-mechanism.html : 差引き台帳（このADの主役シグネチャ）=====
+   「確定申告料金 5万〜10万」が ふるさと納税の相殺で「実質無料」になる会計の差引きを、
+   赤字(コスト)->黒字(実質無料)＋太い矢印で見せる。続けて4ステップ（アイコン入り）。 */
 
-/* ---- folio 章番号：見出し背面に大きく薄く（奥行き演出） ---- */
-#sec-mech .mech-folio {
-  position: absolute;
-  top: var(--sp-7);
-  right: var(--content-pad-x);
-  font-size: clamp(120px, 16vw, 220px); /* 大きく薄く：誌面の奥行き感 */
-  line-height: 1;
-  pointer-events: none;
-  user-select: none;
-  color: var(--c-ink-a06);
-  font-family: var(--font-num);
-  font-weight: 800;
-  z-index: 0;
-}
-
-/* ---- セクション全体の z 管理（folio を背面に） ---- */
 #sec-mech .lp-container { position: relative; z-index: 1; }
 
-/* ---- ヘッダ部（眉 / H2 / リード）---- */
-#sec-mech .mech-header {
-  max-width: var(--content-narrow);
-  margin-bottom: var(--sp-8);
-}
+#sec-mech .mech-header { max-width: var(--content-narrow); margin-bottom: var(--sp-8); }
+#sec-mech .mech-eyebrow-wrap { margin-bottom: var(--sp-5); }
+#sec-mech .mech-h2 { margin-bottom: var(--sp-5); }
+#sec-mech .mech-lead { max-width: 640px; }
 
-#sec-mech .mech-eyebrow-wrap {
-  margin-bottom: var(--sp-5);
-}
-
-#sec-mech .mech-h2 {
-  margin-bottom: var(--sp-5);
-}
-
-#sec-mech .mech-lead {
-  max-width: 640px;
-}
-
-/* ---- 見開き比較パネル ---- */
-#sec-mech .mech-compare {
+/* ---- 差引き台帳：いままで -> これから（3カラム：コスト面／矢印／黒字面）---- */
+#sec-mech .mech-ledger {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
   gap: 0;
-  margin-bottom: var(--sp-7);
   border: 1px solid var(--c-line);
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-card);
-}
-
-@media (max-width: 640px) {
-  #sec-mech .mech-compare {
-    grid-template-columns: 1fr; /* モバイルは縦積み */
-  }
-}
-
-/* 左：いままで（薄い紙dim面） */
-#sec-mech .mech-before {
-  background: var(--c-paper-dim);
-  padding: var(--sp-7) var(--sp-6);
-  position: relative;
-}
-
-/* 右：これから（白面にティール左罫） */
-#sec-mech .mech-after {
   background: var(--c-surface);
-  border-left: 1px solid var(--c-line);
-  border-top: none; /* 上は比較全体のborderに任せる */
-  padding: var(--sp-7) var(--sp-6);
-  position: relative;
-  /* ティール左罫：これからの面をアクセント化 */
-  border-left: 4px solid var(--c-teal);
-}
-
-@media (max-width: 640px) {
-  #sec-mech .mech-after {
-    border-left: none;
-    border-top: 4px solid var(--c-teal); /* モバイルは上罫 */
-  }
-}
-
-/* 比較パネルのラベル（いままで / これから） */
-#sec-mech .mech-panel-label {
-  font-family: var(--font-body);
-  font-size: var(--fs-eyebrow);
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  margin-bottom: var(--sp-4);
-}
-
-#sec-mech .mech-before .mech-panel-label { color: var(--c-ink-soft); }
-#sec-mech .mech-after .mech-panel-label  { color: var(--c-teal); }
-
-/* 比較パネルの大きな金額数字 */
-#sec-mech .mech-price {
-  font-size: clamp(48px, 7vw, 88px); /* 大きく・インパクト */
-  margin-bottom: var(--sp-4);
-  display: flex;
-  align-items: baseline;
-  gap: var(--sp-2);
-}
-
-#sec-mech .mech-before .mech-price { color: var(--c-ink-soft); }
-#sec-mech .mech-after  .mech-price { color: var(--c-teal); }
-
-#sec-mech .mech-price-unit {
-  font-family: var(--font-body);
-  font-size: var(--fs-small);
-  font-weight: 700;
-  color: var(--c-ink-soft);
-  letter-spacing: .04em;
-}
-
-/* ic-x / ic-check の配色 */
-#sec-mech .mech-before .mech-panel-icon { color: var(--c-ink-soft); }
-#sec-mech .mech-after  .mech-panel-icon { color: var(--c-teal); }
-
-/* 比較リスト */
-#sec-mech .mech-panel-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-3);
-  margin-top: var(--sp-4);
-}
-
-#sec-mech .mech-panel-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--sp-3);
-  font-size: var(--fs-small);
-  line-height: 1.7;
-  color: var(--c-ink-soft);
-}
-
-#sec-mech .mech-panel-list li svg { flex-shrink: 0; margin-top: 2px; }
-
-/* ghost「2,000」（右パネル背面に端揃え） */
-#sec-mech .mech-ghost-after {
-  position: absolute;
-  bottom: -8px;
-  right: -8px;
-  font-size: clamp(64px, 10vw, 128px); /* 大きく端に溢れるほど */
-  color: var(--c-teal-a08); /* ティール系ghostで地と馴染む */
-  line-height: .85;
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-  font-family: var(--font-num);
-  font-weight: 800;
-}
-
-#sec-mech .mech-after > *:not(.mech-ghost-after) { position: relative; z-index: 1; }
-
-/* stamp：実質負担 2,000円 */
-#sec-mech .mech-stamp-wrap {
-  margin-top: var(--sp-4);
-}
-
-/* ---- つまり文（比較の結論） ---- */
-#sec-mech .mech-summary {
-  max-width: 640px;
-  font-size: var(--fs-lead);
-  line-height: var(--lh-body);
-  color: var(--c-ink);
-  margin: var(--sp-6) 0;
-  padding-left: var(--sp-5);
-  /* 真鍮hairline左罫：結論行を視覚的に際立たせる */
-  border-left: 1px solid var(--c-gold-line);
-}
-
-/* ---- 手順4ステップ ---- */
-#sec-mech .mech-steps-heading {
-  font-family: var(--font-body);
-  font-size: var(--fs-eyebrow);
-  font-weight: 700;
-  letter-spacing: var(--ls-eyebrow);
-  text-transform: uppercase;
-  color: var(--c-teal);
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
-  margin-bottom: var(--sp-6);
-}
-
-#sec-mech .mech-steps-heading::before {
-  content: "";
-  width: 32px;
-  height: 1px;
-  background: var(--c-gold-line); /* 真鍮hairline：眉と同じ上質overline */
-}
-
-#sec-mech .mech-steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 0;
-  position: relative;
   margin-bottom: var(--sp-7);
 }
 
-@media (max-width: 800px) {
-  #sec-mech .mech-steps {
-    grid-template-columns: 1fr 1fr; /* タブレットは2列 */
-  }
+#sec-mech .mech-col { padding: var(--sp-7) var(--sp-6); display: flex; flex-direction: column; gap: var(--sp-4); }
+#sec-mech .mech-before { background: var(--c-paper-dim); border-top: 4px solid var(--c-coral); }
+#sec-mech .mech-after  { background: var(--c-surface);  border-top: 4px solid var(--c-teal); }
+
+#sec-mech .mech-panel-label {
+  font-family: var(--font-num);
+  font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+}
+#sec-mech .mech-before .mech-panel-label { color: var(--c-coral); }
+#sec-mech .mech-after  .mech-panel-label { color: var(--c-teal); }
+
+#sec-mech .mech-fee-label { font-size: var(--fs-small); color: var(--c-ink-soft); font-weight: 600; }
+
+/* 料金行 */
+#sec-mech .mech-fee {
+  display: flex; align-items: baseline; gap: var(--sp-2);
+  font-family: var(--font-num); font-weight: 600; line-height: 1;
+}
+#sec-mech .mech-before .mech-fee { color: var(--c-coral); }
+#sec-mech .mech-after  .mech-fee { color: var(--c-teal); }
+#sec-mech .mech-fee .mech-amt { font-size: clamp(30px, 4.6vw, 52px); letter-spacing: -.02em; }
+#sec-mech .mech-before .mech-amt { text-decoration: line-through; text-decoration-thickness: 2px; }
+#sec-mech .mech-fee .mech-unit { font-family: var(--font-num); font-size: var(--fs-small); font-weight: 500; color: var(--c-ink-soft); }
+#sec-mech .mech-after .mech-free { font-size: clamp(34px, 5vw, 56px); letter-spacing: -.01em; }
+
+#sec-mech .mech-note { font-size: var(--fs-small); color: var(--c-ink-soft); line-height: 1.7; }
+#sec-mech .mech-note.is-good { color: var(--c-teal); font-weight: 600; }
+
+/* 中央：太い矢印 */
+#sec-mech .mech-arrow {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--c-teal-wash);
+  padding: 0 var(--sp-5);
+  border-left: 1px solid var(--c-line);
+  border-right: 1px solid var(--c-line);
+}
+#sec-mech .mech-arrow .ic { width: 48px; height: 48px; stroke-width: 2.5; color: var(--c-teal); }
+#sec-mech .mech-arrow-v { display: none; }
+
+@media (max-width: 720px) {
+  #sec-mech .mech-ledger { grid-template-columns: 1fr; }
+  #sec-mech .mech-before { border-top: 4px solid var(--c-coral); }
+  #sec-mech .mech-arrow { padding: var(--sp-3) 0; border-left: none; border-right: none; border-top: 1px solid var(--c-line); border-bottom: 1px solid var(--c-line); }
+  #sec-mech .mech-arrow .mech-arrow-h { display: none; }
+  #sec-mech .mech-arrow .mech-arrow-v { display: block; }
 }
 
-@media (max-width: 480px) {
-  #sec-mech .mech-steps {
-    grid-template-columns: 1fr; /* モバイルは縦一列 */
-  }
+/* ---- ⑦ つまり文（結論・黒字グリーン左罫） ---- */
+#sec-mech .mech-summary {
+  max-width: 680px;
+  font-size: var(--fs-lead); line-height: var(--lh-body); color: var(--c-ink);
+  margin: var(--sp-7) 0;
+  padding-left: var(--sp-5);
+  border-left: 4px solid var(--c-teal);
 }
 
-/* ステップカード */
-#sec-mech .mech-step {
-  background: var(--c-surface);
-  border: 1px solid var(--c-line);
-  border-radius: 0;
-  padding: var(--sp-6) var(--sp-5);
-  position: relative;
-}
-
-/* カード間の真鍮コネクタ罫（横方向接続線） */
-#sec-mech .mech-step:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: -1px; /* 境界に重ねる */
-  width: 1px;
-  height: 32px; /* 短いコネクタ罫 */
-  background: var(--c-gold-line); /* 真鍮hairline：ステップの繋がりを示す */
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-@media (max-width: 800px) {
-  /* タブレット2列では右端カードのコネクタは不要（CSSで条件分岐は難しいのでコネクタは縦方向のみにシンプル化） */
-  #sec-mech .mech-step:not(:last-child)::after {
-    top: auto;
-    bottom: -1px;
-    left: 50%;
-    right: auto;
-    width: 32px;
-    height: 1px;
-    transform: translateX(-50%);
-  }
-}
-
-/* 最初のカードは左上角丸 */
-#sec-mech .mech-step:first-child {
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
-}
-
-/* 最後のカードは右上角丸 */
-#sec-mech .mech-step:last-child {
-  border-radius: 0 var(--radius-md) var(--radius-md) 0;
-}
-
-@media (max-width: 800px) {
-  #sec-mech .mech-step:first-child  { border-radius: var(--radius-md) var(--radius-md) 0 0; }
-  #sec-mech .mech-step:last-child   { border-radius: 0 0 var(--radius-md) var(--radius-md); }
-  #sec-mech .mech-step:nth-child(2) { border-radius: 0; }
-  #sec-mech .mech-step:nth-child(3) { border-radius: 0; }
-}
-
-@media (max-width: 480px) {
-  #sec-mech .mech-step         { border-radius: 0; border-bottom: none; }
-  #sec-mech .mech-step:first-child { border-radius: var(--radius-md) var(--radius-md) 0 0; }
-  #sec-mech .mech-step:last-child  { border-radius: 0 0 var(--radius-md) var(--radius-md); border-bottom: 1px solid var(--c-line); }
-}
-
-/* ステップ番号（漢数字）：真鍮hairlineの下線で章番号感を演出 */
-#sec-mech .mech-step-num {
-  font-family: var(--font-serif); /* 漢数字は明朝で重厚に */
-  font-size: clamp(28px, 3.5vw, 40px);
-  font-weight: 700;
-  color: var(--c-ink-a12); /* 薄く：装飾として */
-  line-height: 1;
-  margin-bottom: var(--sp-4);
-  padding-bottom: var(--sp-3);
-  border-bottom: 1px solid var(--c-gold-line); /* 真鍮hairline区切り */
-  display: inline-block;
-}
-
-#sec-mech .mech-step-title {
-  font-family: var(--font-body);
-  font-size: var(--fs-body);
-  font-weight: 700;
-  color: var(--c-ink);
-  margin-bottom: var(--sp-3);
-  line-height: 1.5;
-}
-
-#sec-mech .mech-step-detail {
-  font-size: var(--fs-small);
-  color: var(--c-ink-soft);
-  line-height: 1.8;
-}
-
-/* ---- 結びと CTA ---- */
-#sec-mech .mech-closing {
-  text-align: center;
-  padding-top: var(--sp-6);
-  border-top: 1px solid var(--c-line); /* セクション締めの hairline */
-}
-
-#sec-mech .mech-closing-text {
-  font-family: var(--font-serif); /* 明朝：結論行として格を出す */
-  font-size: var(--fs-h3);
-  color: var(--c-ink);
+/* ---- ⑧ 手順4ステップ（アイコン入り）---- */
+#sec-mech .mech-steps-heading {
+  font-family: var(--font-num);
+  font-size: var(--fs-eyebrow); font-weight: 600;
+  letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+  color: var(--c-teal);
+  display: flex; align-items: center; gap: var(--sp-3);
   margin-bottom: var(--sp-6);
-  word-break: keep-all;
 }
+#sec-mech .mech-steps-heading::before { content: ""; width: 28px; height: 1px; background: var(--c-teal); }
 
-#sec-mech .mech-cta-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sp-3);
+#sec-mech .mech-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-bottom: var(--sp-7); }
+@media (max-width: 800px) { #sec-mech .mech-steps { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 480px) { #sec-mech .mech-steps { grid-template-columns: 1fr; } }
+
+#sec-mech .mech-step { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius-md); padding: var(--sp-6) var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-3); }
+
+/* 番号＋アイコンの行（空白を埋める） */
+#sec-mech .mech-step-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+#sec-mech .mech-step-num {
+  font-family: var(--font-num); font-size: var(--fs-h3); font-weight: 600;
+  color: var(--c-ink-faint); line-height: 1;
 }
+#sec-mech .mech-step-ic {
+  width: 44px; height: 44px; border-radius: var(--radius-sm);
+  background: var(--c-teal-wash); border: 1px solid var(--c-teal-a30);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+#sec-mech .mech-step-ic .ic { width: 24px; height: 24px; color: var(--c-teal); }
+#sec-mech .mech-step-title { font-family: var(--font-body); font-size: var(--fs-body); font-weight: 700; color: var(--c-ink); line-height: 1.5; }
+#sec-mech .mech-step-detail { font-size: var(--fs-small); color: var(--c-ink-soft); line-height: 1.8; }
+
+/* ---- 結び＋CTA ---- */
+#sec-mech .mech-closing { text-align: center; padding-top: var(--sp-6); border-top: 1px solid var(--c-line); }
+#sec-mech .mech-closing-text { font-family: var(--font-serif); font-size: var(--fs-h3); font-weight: 600; color: var(--c-ink); margin-bottom: var(--sp-6); word-break: keep-all; }
+#sec-mech .mech-cta-wrap { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
 </style>
 
 <section class="lp-section lp-section--paper lp-grain" id="sec-mech">
-
-  <!-- folio：見出し背面に大型薄章番号（誌面の奥行き） -->
   <div class="lp-container">
 
-    <!-- ヘッダ：眉 / H2 / リード -->
+    <!-- ヘッダ -->
     <div class="mech-header" data-reveal data-reveal-delay="1">
-      <div class="mech-eyebrow-wrap">
-        <span class="lp-eyebrow">仕組み — なぜ実質無料なのか</span>
-      </div>
-
+      <div class="mech-eyebrow-wrap"><span class="lp-eyebrow">仕組み — なぜ実質無料なのか</span></div>
       <h2 class="lp-h2 mech-h2" data-reveal data-reveal-delay="2">
         なぜ、財布から<em>1円も減らさず</em>に<br>
         確定申告が終わるのか。
       </h2>
-
       <p class="lp-lead mech-lead" data-reveal data-reveal-delay="3">
-        仕組みはシンプルです。先生がふるさと納税で申し込むのは、当社の「医師限定・資産防衛コンサルティング」。国や自治体へ納める税金（ふるさと納税の控除）をこのコンサルに充てることで、特別開催の特典として、提携税理士が先生の確定申告を"無料"で代行します。
+        先生がふるさと納税で申し込むのは、当社の「医師限定・資産防衛コンサルティング」。国や自治体へ納める税金（ふるさと納税の控除）をこのコンサルに充てることで、特別開催の特典として、提携税理士が先生の確定申告を<em class="lp-em">無料</em>で代行します。
       </p>
     </div>
 
-    <!-- 見開き比較：いままで vs これから -->
-    <div class="mech-compare" data-reveal>
+    <!-- ⑥ 差引き台帳：確定申告料金 5万〜10万 -> 実質無料 -->
+    <div class="mech-ledger" data-reveal>
 
-      <!-- 左：いままで（薄いpaper-dim面） -->
-      <div class="mech-before" data-reveal="left">
+      <div class="mech-col mech-before" data-reveal="left">
         <p class="mech-panel-label">いままで</p>
-
-        <div class="mech-price">
-          <svg class="ic mech-panel-icon" aria-hidden="true">
-            <use href="#ic-x"/>
-          </svg>
-          <span class="lp-num" style="font-size: clamp(30px, 4.4vw, 52px); color: var(--c-ink-soft); white-space: nowrap;">50,000〜100,000</span>
-          <span class="mech-price-unit">円／年</span>
+        <p class="mech-fee-label">確定申告料金</p>
+        <div class="mech-fee">
+          <span class="mech-amt lp-num">5万〜10万</span>
+          <span class="mech-unit">円</span>
         </div>
-
-        <ul class="mech-panel-list">
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-ink-faint);">
-              <use href="#ic-x"/>
-            </svg>
-            コンサル費用は全額自己負担
-          </li>
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-ink-faint);">
-              <use href="#ic-x"/>
-            </svg>
-            節税の仕組みとは無関係
-          </li>
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-ink-faint);">
-              <use href="#ic-x"/>
-            </svg>
-            ただ財布から出ていくだけ
-          </li>
-        </ul>
+        <p class="mech-note">コンサル費用・税理士報酬は<br>全額自己負担で出ていくだけ。</p>
       </div>
 
-      <!-- 右：これから（白面・ティール左罫・ghost「2,000」） -->
-      <div class="mech-after" data-reveal="right">
-        <!-- ghost数字：背面に端揃え（結論数字を低コントラストで） -->
+      <div class="mech-arrow" aria-hidden="true">
+        <svg class="ic mech-arrow-h"><use href="#ic-arrow"/></svg>
+        <svg class="ic mech-arrow-v" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+      </div>
+
+      <div class="mech-col mech-after" data-reveal="right">
         <p class="mech-panel-label">これから</p>
-
-        <div class="mech-price">
-          <svg class="ic mech-panel-icon" aria-hidden="true">
-            <use href="#ic-check"/>
-          </svg>
-          <span class="lp-num" style="font-size: clamp(48px, 7vw, 88px); color: var(--c-teal);">2,000</span>
-          <span class="mech-price-unit">円（実質負担）</span>
+        <p class="mech-fee-label">確定申告料金</p>
+        <div class="mech-fee">
+          <span class="mech-free">実質無料</span>
+          <span class="mech-unit">／円</span>
         </div>
-
-        <ul class="mech-panel-list">
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-teal);">
-              <use href="#ic-check"/>
-            </svg>
-            寄付金の控除で費用がほぼ全額戻る
-          </li>
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-teal);">
-              <use href="#ic-check"/>
-            </svg>
-            どうせ払う税金の使い道を変えるだけ
-          </li>
-          <li>
-            <svg class="ic" aria-hidden="true" style="color: var(--c-teal);">
-              <use href="#ic-check"/>
-            </svg>
-            手続きはスマホで5分・書類不要
-          </li>
-        </ul>
-
-        <!-- stamp：実質負担2,000円 -->
-        <div class="mech-stamp-wrap">
-          <span class="lp-stamp">実質負担 2,000円</span>
-        </div>
+        <p class="mech-note is-good">ふるさと納税の控除で全額戻り、<br>自己負担はふるさと納税分の2,000円のみ。</p>
       </div>
 
     </div>
-    <!-- /見開き比較 -->
 
-    <!-- つまり文：比較の結論（真鍮hairline左罫で際立たせる） -->
+    <!-- ⑦ つまり文 -->
     <p class="mech-summary" data-reveal data-reveal-delay="1">
-      ふるさと納税の枠で<em class="lp-em">資産防衛コンサル</em>を申し込むだけで、面倒な確定申告まで自動的に終わります。
+      つまり、ふるさと納税の枠で<em class="lp-em">資産防衛コンサル</em>を申し込むだけで、面倒な確定申告まで自動的に終わります。
     </p>
 
-    <!-- 手順4ステップ -->
+    <!-- ⑧ 手順4ステップ（アイコン入り） -->
     <p class="mech-steps-heading" data-reveal>申し込みから完了まで、4つのステップ</p>
-
     <div class="mech-steps">
 
-      <div class="mech-step lp-card" data-reveal data-reveal-delay="1">
-        <span class="mech-step-num" aria-label="ステップ1">1</span>
-        <p class="mech-step-title">プランを選択</p>
-        <p class="mech-step-detail">
-          梅 31,000円 ／ 竹 52,000円<br>
-          （ふるさと納税の寄付額）
-        </p>
+      <div class="mech-step lp-card lp-lift" data-reveal data-reveal-delay="1">
+        <div class="mech-step-top">
+          <span class="mech-step-num">01</span>
+          <span class="mech-step-ic"><svg class="ic" aria-hidden="true"><use href="#ic-doc"/></svg></span>
+        </div>
+        <p class="mech-step-title">プランを確認</p>
+        <p class="mech-step-detail">52,000円<br>（実質2,000円負担のみ）</p>
       </div>
 
-      <div class="mech-step lp-card" data-reveal data-reveal-delay="2">
-        <span class="mech-step-num" aria-label="ステップ2">2</span>
+      <div class="mech-step lp-card lp-lift" data-reveal data-reveal-delay="2">
+        <div class="mech-step-top">
+          <span class="mech-step-num">02</span>
+          <span class="mech-step-ic"><svg class="ic" aria-hidden="true"><use href="#ic-phone"/></svg></span>
+        </div>
         <p class="mech-step-title">ふるさと納税で寄付</p>
-        <p class="mech-step-detail">
-          専用URLから<br>
-          スマホで5分
-        </p>
+        <p class="mech-step-detail">専用URLから<br>スマホで5分</p>
       </div>
 
-      <div class="mech-step lp-card" data-reveal data-reveal-delay="3">
-        <span class="mech-step-num" aria-label="ステップ3">3</span>
+      <div class="mech-step lp-card lp-lift" data-reveal data-reveal-delay="3">
+        <div class="mech-step-top">
+          <span class="mech-step-num">03</span>
+          <span class="mech-step-ic"><svg class="ic" aria-hidden="true"><use href="#ic-online"/></svg></span>
+        </div>
         <p class="mech-step-title">コンサル開始</p>
-        <p class="mech-step-detail">
-          書類はメール・<br>
-          LINEで完結
-        </p>
+        <p class="mech-step-detail">書類はメール・<br>LINEで完結</p>
       </div>
 
-      <div class="mech-step lp-card" data-reveal data-reveal-delay="4">
-        <span class="mech-step-num" aria-label="ステップ4">4</span>
+      <div class="mech-step lp-card lp-lift" data-reveal data-reveal-delay="4">
+        <div class="mech-step-top">
+          <span class="mech-step-num">04</span>
+          <span class="mech-step-ic"><svg class="ic" aria-hidden="true"><use href="#ic-check"/></svg></span>
+        </div>
         <p class="mech-step-title">確定申告が完了</p>
-        <p class="mech-step-detail">
-          提携税理士が代行<br>
-          実質負担<strong style="color: var(--c-teal);">2,000円</strong>
-        </p>
+        <p class="mech-step-detail">提携税理士が代行<br>実質負担<strong style="color:var(--c-teal);">2,000円</strong></p>
       </div>
 
     </div>
-    <!-- /手順4ステップ -->
 
     <!-- 結び＋CTA -->
     <div class="mech-closing" data-reveal data-reveal-delay="1">
-      <p class="mech-closing-text">
-        つまり、確定申告は「資産防衛のついで」で完了します。
-      </p>
+      <p class="mech-closing-text">つまり、確定申告は「資産防衛のついで」で完了します。</p>
       <div class="mech-cta-wrap">
         <a href="#form" class="lp-cta">
           この仕組みで申し込む
-          <svg class="ic" aria-hidden="true">
-            <use href="#ic-arrow"/>
-          </svg>
+          <svg class="ic" aria-hidden="true"><use href="#ic-arrow"/></svg>
         </a>
       </div>
     </div>
 
-  </div><!-- /lp-container -->
-
+  </div>
 </section>
 <!-- ===== 04-value.html ===== -->
 <style>
@@ -1222,15 +1016,15 @@ body { padding-top: var(--sp-6); }
 #sec-value .val-num {
   font-family: var(--font-num);
   font-variant-numeric: tabular-nums;
-  font-weight: 800;
+  font-weight: 600;
   font-size: var(--fs-num-l);
   line-height: 1;
-  letter-spacing: -.01em;
+  letter-spacing: -.02em;
   white-space: nowrap;
 }
-/* これまで＝桁の大きい具体額。長いので一段小さく・沈める */
-#sec-value .val-before .val-num { color: var(--c-ink-soft); font-size: clamp(26px, 3.4vw, 44px); }
-/* これから＝主役。ティールで一段大きく（桁の差＝50,000〜100,000 vs 2,000 を見せる） */
+/* これまで＝赤字(コスト)。取り消し線で「もう払わない」を明示 */
+#sec-value .val-before .val-num { color: var(--c-coral); font-size: clamp(26px, 3.4vw, 44px); text-decoration: line-through; text-decoration-thickness: 2px; }
+/* これから＝黒字(主役)。グリーンで一段大きく（桁の差を見せる） */
 #sec-value .val-after  .val-num { color: var(--c-teal); font-size: clamp(34px, 4.6vw, 60px); }
 #sec-value .val-unit {
   font-family: var(--font-body);
@@ -2088,7 +1882,7 @@ body { padding-top: var(--sp-6); }
 /* ===== 08-closing.html: ダーク＋写真bg＋緊急コーラル ===== */
 
 /* 写真背景とダークオーバーレイ（AA可読コントラストを確保）
-   --c-teal-ink = #0A302A を使ったグラデーションで透過レイヤー化 */
+   var(--c-teal-ink) のグラデーションで透過レイヤー化 */
 #sec-closing {
   background:
     linear-gradient(
