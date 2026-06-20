@@ -452,7 +452,7 @@ body { padding-top: var(--sp-7); }
   }
 
   #hero-inner {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr); /* 1fr単独だと最小幅が中身に引っ張られ画面外へ溢れるため0で床留め */
     grid-template-rows: auto auto;
     min-height: auto;
   }
