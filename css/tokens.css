@@ -177,6 +177,11 @@ img { max-width: 100%; display: block; }
   .lp-cta, .lp-cta--lg { width: 100%; max-width: 100%; padding-left: var(--sp-4); padding-right: var(--sp-4); white-space: normal; }
   .lp-cta .lp-nowrap { white-space: normal; }
 }
+/* スマホで見出し等の長い行が iOS Safari の keep-all で折り返されず右に溢れる対策。
+   モバイルでは自然な日本語折返しを許可し、はみ出す場合は必ず改行する（右端切れ防止）。 */
+@media (max-width: 768px) {
+  .lp-h2, .lp-h3, .lp-eyebrow, .lp-quote { word-break: normal; overflow-wrap: anywhere; }
+}
 
 /* カード白面（影＋クール罫） */
 .lp-card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
