@@ -172,6 +172,11 @@ img { max-width: 100%; display: block; }
 .lp-cta--ghost:hover { background: var(--c-teal-wash); transform: translateY(-2px); box-shadow: none; }
 .lp-cta-note { font-size: var(--fs-small); color: var(--c-ink-faint); margin-top: var(--sp-3); }
 .lp-cta-sub { display: inline-block; }
+/* 狭い端末でCTAが画面外へはみ出す（右端切れ）のを防ぐ：全幅＋余白縮小＋折返し可 */
+@media (max-width: 420px) {
+  .lp-cta, .lp-cta--lg { width: 100%; max-width: 100%; padding-left: var(--sp-4); padding-right: var(--sp-4); white-space: normal; }
+  .lp-cta .lp-nowrap { white-space: normal; }
+}
 
 /* カード白面（影＋クール罫） */
 .lp-card { background: var(--c-surface); border: 1px solid var(--c-line); border-radius: var(--radius-md); box-shadow: var(--shadow-card); }
