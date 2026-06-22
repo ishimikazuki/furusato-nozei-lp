@@ -2235,7 +2235,8 @@ body { padding-top: var(--sp-7); }
   background: var(--c-teal-wash); border: 2px solid var(--c-teal-a30); margin-bottom: var(--sp-6);
 }
 #form-done .done-icon-wrap .ic { width: 36px; height: 36px; color: var(--c-teal); stroke-width: 2; }
-#form-done .done-heading { font-family: var(--font-serif); font-size: var(--fs-h2); font-weight: 700; color: var(--c-ink); line-height: var(--lh-display); margin-bottom: var(--sp-5); word-break: keep-all; }
+/* word-break:normal で日本語を自然に折り返す（keep-all だと狭幅で1行のままはみ出す） */
+#form-done .done-heading { font-family: var(--font-serif); font-size: var(--fs-h2); font-weight: 700; color: var(--c-ink); line-height: var(--lh-display); margin-bottom: var(--sp-5); word-break: normal; }
 #form-done .done-when { font-size: var(--fs-body); color: var(--c-ink); margin-bottom: var(--sp-5); }
 #form-done .done-when b { font-family: var(--font-num); color: var(--c-teal); font-weight: 700; }
 #form-done .done-body { font-size: var(--fs-body); color: var(--c-ink-soft); line-height: var(--lh-body); max-width: 480px; margin-left: auto; margin-right: auto; }
